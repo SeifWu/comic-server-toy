@@ -1,0 +1,11 @@
+server:
+  port: 1016
+
+dataSource:
+  driverName: mysql
+  host: 127.0.0.1
+  port: 3306
+  database: ginBasicProject
+  username: root
+  password: aptx4869
+  charset: utf8
