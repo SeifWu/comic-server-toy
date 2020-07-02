@@ -27,7 +27,7 @@ func InitDB() *gorm.DB {
 		panic("数据库连接失败，错误:" + err.Error())
 	}
 
-	DBTables()
+	DBMigrate()
 
 	global.DB = db
 	return db

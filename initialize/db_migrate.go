@@ -5,8 +5,8 @@ import (
 	"seifwu.com/gin-basic-project/model"
 )
 
-// DBTables Migrate Table
-func DBTables() {
+// DBMigrate Migrate Table
+func DBMigrate() {
 	db := global.DB
 
 	db.AutoMigrate(
