@@ -1,38 +1,24 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"os"
-
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
+	"seifwu.com/gin-basic-project/config"
+	"seifwu.com/gin-basic-project/global"
+	"seifwu.com/gin-basic-project/initialize"
+
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 func main() {
-	InitConfig()
-	driverName := viper.GetString("datasource.driverName")
+	config.InitConfig()
+	initialize.InitDB()
+	defer global.DB.Close()
 
 	r := gin.Default()
-
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"msg": driverName,
-		})
-	})
-
-	panic(r.Run())
-}
-
-// InitConfig 配置初始化
-func InitConfig() {
-	rootedPath, _ := os.Getwd()
-	viper.SetConfigName("application")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath(rootedPath + "/config")
-
-	if err := viper.ReadInConfig(); err != nil {
-		panic(fmt.Errorf("Fatal error config file: %s", err))
+	port := viper.GetString("server.port")
+	if port != "" {
+		panic(r.Run(":" + port))
 	}
-
+	panic(r.Run()) // 默认监听并在 0.0.0.0:8080 上启动服务
 }
