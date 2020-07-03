@@ -5,12 +5,11 @@ import (
 
 	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
-
 	"seifwu.com/gin-basic-project/global"
 )
 
 // InitDB 初始化数据库
-func InitDB() *gorm.DB {
+func InitDB() {
 	driverName := viper.GetString("dataSource.driverName")
 
 	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true",
@@ -27,8 +26,6 @@ func InitDB() *gorm.DB {
 		panic("数据库连接失败，错误:" + err.Error())
 	}
 
-	DBMigrate()
-
 	global.DB = db
-	return db
+	DBMigrate()
 }
