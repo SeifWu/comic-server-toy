@@ -1,8 +1,8 @@
-package initialize
+package initializers
 
 import (
-	"seifwu.com/gin-basic-project/global"
-	"seifwu.com/gin-basic-project/model"
+	model "seifwu/app/models"
+	"seifwu/global"
 )
 
 // DBMigrate Migrate Table
