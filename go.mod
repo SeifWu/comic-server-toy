@@ -1,5 +1,4 @@
-module seifwu.com/gin-basic-project
-
+module seifwu
 go 1.14
 
 require (
