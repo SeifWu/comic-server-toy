@@ -14,6 +14,8 @@ func Routers() *gin.Engine {
 	{
 		// 发送邮件
 		v1.POST("/send_mail", v1api.SendAuthCodeMailsController)
+		// 登录
+		v1.POST("/login", v1api.Login)
 	}
 
 	UserRoutes(router)
