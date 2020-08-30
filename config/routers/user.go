@@ -3,6 +3,7 @@ package routers
 import (
 	v1customerapi "seifwu/app/controllers/api/v1/customer"
 	v1managerapi "seifwu/app/controllers/api/v1/manager"
+	"seifwu/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +19,7 @@ func UserRoutes(r *gin.Engine) {
 			customer.GET("/:id", v1customerapi.FindUser)
 		}
 		manager := v1.Group("/manager/user")
+		manager.Use(middleware.JWTAuth())
 		{
 			manager.GET("", v1managerapi.FindListUser)
 		}
