@@ -2,7 +2,7 @@ package application
 
 import (
 	"seifwu/config/routers"
-	"seifwu/global"
+	global "seifwu/global"
 
 	"github.com/spf13/viper"
 )
