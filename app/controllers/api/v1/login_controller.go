@@ -1,7 +1,6 @@
 package v1api
 
 import (
-	"log"
 	"net/http"
 	model "seifwu/app/models"
 	param "seifwu/app/params"
@@ -11,12 +10,12 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
 
 // Login 定义登陆逻辑
-// model.LoginReq中定义了登陆的请求体(userName,passWord)
 func Login(c *gin.Context) {
 	DB := global.DB
 
@@ -47,6 +46,10 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	session := sessions.Default(c)
+	session.Set("appSession", user.ID)
+	err = session.Save()
+
 	// 验证通过后为该次请求生成token
 	if user.ID != 0 {
 		generateToken(c, user)
@@ -74,7 +77,6 @@ func generateToken(c *gin.Context, user model.User) {
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": -1, "msg": err.Error(), "data": nil})
 	}
-	log.Println(token)
 	// 封装一个响应数据,返回用户名和token
 	data := gin.H{"userName": user.UserName, "token": token}
 	c.JSON(http.StatusOK, gin.H{"status": 0, "msg": "登陆成功", "data": data})
