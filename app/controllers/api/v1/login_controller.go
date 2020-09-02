@@ -34,7 +34,7 @@ func Login(c *gin.Context) {
 	DB = DB.Where(&model.User{UserName: loginParams.UserName}).First(&user)
 
 	if user.ID == 0 {
-		response.Response(c, http.StatusUnprocessableEntity, 422, nil, "用户不存在")
+		response.Response(c, http.StatusBadRequest, 40001, nil, "用户不存在")
 		return
 	}
 
