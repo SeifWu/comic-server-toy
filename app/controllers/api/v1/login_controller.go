@@ -40,7 +40,7 @@ func Login(c *gin.Context) {
 	// 密码是否正确
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginParams.PassWord)); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"code": 400,
+			"code": 40001,
 			"msg":  "密码错误",
 		})
 		return
