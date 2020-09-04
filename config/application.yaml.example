@@ -5,13 +5,20 @@ dataSource:
   driverName: mysql
   host: 127.0.0.1
   port: 3306
-  database: blog_with_gin
+  database: database_name
   username: root
   password: root
   charset: utf8
 
+redis:
+  host: 127.0.0.1
+  port: 6379
+
+session:
+  secretKey: secretKey
+
 formMail:
   host: smtp.qq.com
   port: 587
-  user: xx@qq.com
+  user: xxx@qq.com
   password: 授权码或密码
