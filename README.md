@@ -25,3 +25,25 @@
 ## TODO
 
 - [ ] JWT
+
+## Response
+
+### Success
+
+```
+  {
+    "success": true,
+    "data": {},
+    "meta": {},
+  }
+```
+
+### fail
+
+```
+  {
+    "success": false,
+    "code": 40001,
+    "msg": "error message",
+  }
+```
