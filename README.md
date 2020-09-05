@@ -24,5 +24,4 @@
 
 ## TODO
 
-- [ ] 控制 Session
-- [ ] CSRF Token
+- [ ] JWT
