@@ -11,7 +11,7 @@ import (
 )
 
 // UserCreateService 创建用户服务
-func UserCreateService(c *gin.Context, params param.RegisterParams) gin.H {
+func UserCreateService(c *gin.Context, params param.SignUpParam) gin.H {
 	DB := global.DB
 	var user model.User
 	userName := params.Username

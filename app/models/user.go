@@ -17,4 +17,5 @@ type User struct {
 	Avatar      string `json:"avatar" gorm:"comment:'用户头像'"`
 	Mobile      string `json:"mobile" gorm:"comment:'联系电话'"`
 	Description string `json:"description" gorm:"type:text;comment:'个人描述'"`
+	Status      int    `json:"status" gorm:"comment:'0 => 待激活, 1 => 正常'"`
 }
