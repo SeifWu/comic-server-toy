@@ -21,30 +21,10 @@
 - [x] 发送邮件
 - [x] 邮件验证码 Redis 缓存
 - [x] 邮箱方式注册
+- [ ] 短信方式注册
+- [ ] github 注册
 
 ## TODO
 
 - [ ] JWT
-- [ ] validator v10
-
-## Response
-
-### Success
-
-```
-  {
-    "success": true,
-    "data": {},
-    "meta": {},
-  }
-```
-
-### fail
-
-```
-  {
-    "success": false,
-    "code": 40001,
-    "msg": "error message",
-  }
-```
+- [ ] 发送短信
