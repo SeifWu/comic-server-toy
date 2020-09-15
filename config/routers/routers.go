@@ -1,4 +1,4 @@
-package routers
+package router
 
 import (
 	v1api "seifwu/app/controllers/api/v1"
@@ -23,6 +23,9 @@ func Routers() *gin.Engine {
 
 	v1 := router.Group("/api/v1")
 	{
+		v1public := v1.Group("/public")
+		V1Public(v1public)
+
 		// 发送邮件
 		v1.POST("/send_mail", v1api.SendAuthCodeMailsController)
 		// 登录

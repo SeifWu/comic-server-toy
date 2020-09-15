@@ -1,7 +1,6 @@
-package routers
+package router
 
 import (
-	v1customerapi "seifwu/app/controllers/api/v1/customer"
 	v1managerapi "seifwu/app/controllers/api/v1/manager"
 	"seifwu/app/middleware"
 
@@ -12,12 +11,6 @@ import (
 func UserRoutes(r *gin.Engine) {
 	v1 := r.Group("/api/v1")
 	{
-		customer := v1.Group("/customer/user")
-		{
-			customer.POST("", v1customerapi.Register)
-			customer.DELETE("/:id", v1customerapi.UnsubscribeUser)
-			customer.GET("/:id", v1customerapi.FindUser)
-		}
 		manager := v1.Group("/manager/user")
 		manager.Use(middleware.AuthSessionMiddleware())
 		// manager.Use(csrf.Middleware(csrf.Options{

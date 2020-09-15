@@ -1,21 +1,25 @@
-package v1customeraccountapi
+package v1public
 
 import (
 	"net/http"
+	"reflect"
 	param "seifwu/app/params"
 	service "seifwu/app/services"
 	"seifwu/global/response"
+	util "seifwu/utils"
 
 	"github.com/gin-gonic/gin"
 )
 
+var signUpParam param.SignUpParam
+
 // SignUp 注册
 func SignUp(c *gin.Context) {
-	var signUpParam param.SignUpParam
 
-	// TODO 系统化参数验证
-	if err := c.ShouldBindJSON(&signUpParam); err != nil {
-		response.Fail(c, gin.H{"errMsg": "传递参数有误"})
+	if err := c.ShouldBind(&signUpParam); err != nil {
+		reflects := reflect.TypeOf(signUpParam)
+		util.UnifiedValidation(c, err, "40002", reflects)
+
 		return
 	}
 
