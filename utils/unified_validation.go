@@ -12,7 +12,7 @@ import (
 )
 
 // UnifiedValidation 统一参数验证
-func UnifiedValidation(c *gin.Context, err error, errCode string, fields reflect.Type) {
+func UnifiedValidation(c *gin.Context, err error, errCode string, params interface{}) {
 	errs, ok := err.(validator.ValidationErrors)
 	var result = make(map[string]interface{})
 	result["success"] = false
@@ -26,6 +26,7 @@ func UnifiedValidation(c *gin.Context, err error, errCode string, fields reflect
 	}
 
 	var fieldsTrans = make(map[string]string)
+	fields := reflect.TypeOf(params)
 	for i := 0; i < fields.NumField(); i++ {
 		field := fields.Field(i)
 		keyName := field.Tag.Get("json")
