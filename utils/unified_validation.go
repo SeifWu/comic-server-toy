@@ -26,18 +26,24 @@ func UnifiedValidation(c *gin.Context, err error, errCode string, params interfa
 	}
 
 	var fieldsTrans = make(map[string]string)
+	var tagTrans = make(map[string]string)
 	fields := reflect.TypeOf(params)
 	for i := 0; i < fields.NumField(); i++ {
 		field := fields.Field(i)
 		keyName := field.Tag.Get("json")
 		value := field.Tag.Get("label")
 		fieldsTrans[keyName] = value
+		tagTrans[field.Name] = value
 	}
 
 	var resultErrs = make(map[string]string)
 	for k, v := range ValidatorCustomErrorName(errs.Translate(global.Trans)) {
 		fmt.Println(k, v)
 		v = strings.Replace(v, k, fieldsTrans[k], -1)
+		for key, value := range tagTrans {
+			v = strings.ReplaceAll(v, key, value)
+		}
+
 		resultErrs[k] = v
 	}
 

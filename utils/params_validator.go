@@ -15,6 +15,7 @@ func ValidatorCustomErrorName(fields map[string]string) map[string]string {
 	return res
 }
 
+// TransTagName 翻译 tag 名称
 func TransTagName(libTans, err interface{}) interface{} {
 	switch err.(type) {
 	case validator.ValidationErrorsTranslations:
