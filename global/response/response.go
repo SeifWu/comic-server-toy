@@ -7,20 +7,21 @@ import (
 )
 
 // Response 响应
-func Response(ctx *gin.Context, httpStatus int, code int, data gin.H, msg interface{}) {
+func Response(ctx *gin.Context, httpStatus int, code int, data gin.H, msg interface{}, meta gin.H) {
 	ctx.JSON(
 		httpStatus,
 		gin.H{
-			"code": code,
-			"data": data,
-			"msg":  msg,
+			"errCode": code,
+			"data":    data,
+			"message": msg,
+			"meta":    meta,
 		},
 	)
 }
 
 // Success 请求成功
 func Success(ctx *gin.Context, data gin.H, msg interface{}) {
-	Response(ctx, http.StatusOK, 200, data, msg)
+	Response(ctx, http.StatusOK, 200, data, msg, nil)
 }
 
 /*
