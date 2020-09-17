@@ -16,8 +16,9 @@ var signUpParam param.SignUpParam
 func SignUp(c *gin.Context) {
 
 	if err := c.ShouldBind(&signUpParam); err != nil {
-		util.UnifiedValidation(c, err, "40002", signUpParam)
+		errResult := util.UnifiedValidation(c, err, "40002", signUpParam)
 
+		response.Fail(c, errResult)
 		return
 	}
 

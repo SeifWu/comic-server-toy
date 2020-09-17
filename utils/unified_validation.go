@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"reflect"
 	"seifwu/global"
-	"seifwu/global/response"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -12,7 +11,7 @@ import (
 )
 
 // UnifiedValidation 统一参数验证
-func UnifiedValidation(c *gin.Context, err error, errCode string, params interface{}) {
+func UnifiedValidation(c *gin.Context, err error, errCode string, params interface{}) map[string]interface{} {
 	errs, ok := err.(validator.ValidationErrors)
 	var result = make(map[string]interface{})
 	result["success"] = false
@@ -21,8 +20,7 @@ func UnifiedValidation(c *gin.Context, err error, errCode string, params interfa
 	if !ok {
 		// 非 validator.ValidationErrors 类型错误直接返回
 		result["errCode"] = err.Error()
-		response.Fail(c, result)
-		return
+		return result
 	}
 
 	var fieldsTrans = make(map[string]string)
@@ -48,6 +46,5 @@ func UnifiedValidation(c *gin.Context, err error, errCode string, params interfa
 	}
 
 	result["errMsg"] = resultErrs
-	response.Fail(c, result)
-	return
+	return result
 }
