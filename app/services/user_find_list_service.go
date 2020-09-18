@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	model "seifwu/app/models"
-	managerv1serializer "seifwu/app/serializers/api/v1/manager"
+	v1serializer "seifwu/app/serializers/api/v1/manager"
 	"seifwu/global"
 	util "seifwu/utils"
 
@@ -14,7 +14,7 @@ import (
 
 // UserFindListService 用户列表服务
 func UserFindListService(c *gin.Context, paging bool) gin.H {
-	var result []managerv1serializer.ResultSerializer
+	var result []v1serializer.UserSerializer
 	var users []model.User
 	DB := global.DB.Model(&model.User{})
 

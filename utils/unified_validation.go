@@ -11,16 +11,12 @@ import (
 )
 
 // UnifiedValidation 统一参数验证
-func UnifiedValidation(c *gin.Context, err error, errCode string, params interface{}) map[string]interface{} {
+func UnifiedValidation(c *gin.Context, err error, errCode string, params interface{}) interface{} {
 	errs, ok := err.(validator.ValidationErrors)
-	var result = make(map[string]interface{})
-	result["success"] = false
-	result["errCode"] = errCode
 
 	if !ok {
 		// 非 validator.ValidationErrors 类型错误直接返回
-		result["errCode"] = err.Error()
-		return result
+		return err.Error()
 	}
 
 	var fieldsTrans = make(map[string]string)
@@ -45,6 +41,5 @@ func UnifiedValidation(c *gin.Context, err error, errCode string, params interfa
 		resultErrs[k] = v
 	}
 
-	result["errMsg"] = resultErrs
-	return result
+	return resultErrs
 }
