@@ -11,5 +11,8 @@ func DBMigrate() {
 
 	db.AutoMigrate(
 		&model.User{},
+		&model.Comic{},
+		&model.ComicChapter{},
+		&model.ComicChapterDetail{},
 	)
 }
