@@ -1,4 +1,4 @@
-package v1managerapi
+package v1manager
 
 import (
 	"net/http"

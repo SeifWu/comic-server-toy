@@ -1,7 +1,7 @@
 package router
 
 import (
-	v1managerapi "seifwu/app/controllers/api/v1/manager"
+	v1manager "seifwu/app/controllers/api/v1/manager"
 	"seifwu/app/middleware"
 
 	"github.com/gin-gonic/gin"
@@ -21,7 +21,7 @@ func UserRoutes(r *gin.Engine) {
 		// 	},
 		// }))
 		{
-			manager.GET("", v1managerapi.FindListUser)
+			manager.GET("", v1manager.FindListUser)
 		}
 	}
 
