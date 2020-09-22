@@ -7,11 +7,13 @@ import (
 	"github.com/gocolly/colly"
 )
 
+// SearchResults 搜索结果
 type SearchResults struct {
-	Data []searchResult `json:"data"`
+	Data []SearchResult `json:"data"`
 }
 
-type searchResult struct {
+// SearchResult 单条搜索结果
+type SearchResult struct {
 	URL           string `json:"url"`
 	Cover         string `json:"cover"`
 	LatestChapter string `json:"latestChapter"`
@@ -23,7 +25,7 @@ type searchResult struct {
 func (q *Qiman6) Search(query string) (SearchResults, error) {
 	var result SearchResults
 	var err error
-	var searchList []searchResult
+	var searchList []SearchResult
 	domain := "www.qiman6.com"
 
 	// Instantiate default collector
@@ -35,7 +37,7 @@ func (q *Qiman6) Search(query string) (SearchResults, error) {
 	myColly.OnHTML(".mainForm > .updateList > .bookList_3", func(e *colly.HTMLElement) {
 
 		e.ForEach(".item.ib", func(i int, h *colly.HTMLElement) {
-			item := searchResult{
+			item := SearchResult{
 				URL:           domain + h.ChildAttr("a", "href"),
 				Cover:         h.ChildAttr(".book > a > .cover", "src"),
 				LatestChapter: h.ChildText(".book > a > .msg.op"),
@@ -63,6 +65,7 @@ func (q *Qiman6) Search(query string) (SearchResults, error) {
 		fmt.Println("OnResponse:", a)
 	})
 
-	myColly.Visit("http://www.qiman6.com/search.php?keyword=" + query)
+	visitURL := fmt.Sprintf("http://www.qiman6.com/search.php?keyword=%s", query)
+	myColly.Visit(visitURL)
 	return result, err
 }
