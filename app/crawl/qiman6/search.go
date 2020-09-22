@@ -8,15 +8,15 @@ import (
 )
 
 type SearchResults struct {
-	Data []searchResult
+	Data []searchResult `json:"data"`
 }
 
 type searchResult struct {
-	URL           string
-	Cover         string
-	LatestChapter string
-	Title         string
-	Tip           string
+	URL           string `json:"url"`
+	Cover         string `json:"cover"`
+	LatestChapter string `json:"latestChapter"`
+	Title         string `json:"title"`
+	Tip           string `json:"tip"`
 }
 
 // Search 搜索
