@@ -25,7 +25,8 @@ func Routers() *gin.Engine {
 	{
 		v1public := v1.Group("/public")
 		V1Public(v1public)
-
+		v1manager := v1.Group("/manager")
+		V1Manager(v1manager)
 		// 发送邮件
 		v1.POST("/send_mail", v1api.SendAuthCodeMailsController)
 		// 登录
