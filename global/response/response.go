@@ -7,11 +7,11 @@ import (
 )
 
 // Response 响应
-func Response(ctx *gin.Context, httpStatus int, code string, data gin.H, msg interface{}, meta gin.H) {
+func Response(ctx *gin.Context, httpStatus int, errcode string, data interface{}, msg interface{}, meta gin.H) {
 	ctx.JSON(
 		httpStatus,
 		gin.H{
-			"errCode": code,
+			"errCode": errcode,
 			"data":    data,
 			"message": msg,
 			"meta":    meta,
