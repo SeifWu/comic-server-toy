@@ -15,7 +15,7 @@ var JwtSecretKey = []byte(viper.GetString("jwt.secretKey"))
 
 // JWTAuthClaims 自定义声明结构体并内嵌jwt.StandardClaims
 type JWTAuthClaims struct {
-	UserName string `json:"username"`
+	Username string `json:"username"`
 	jwt.StandardClaims
 }
 

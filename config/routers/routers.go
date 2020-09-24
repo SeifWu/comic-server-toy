@@ -2,6 +2,7 @@ package router
 
 import (
 	v1api "seifwu/app/controllers/api/v1"
+	"seifwu/app/middleware"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/redis"
@@ -26,11 +27,10 @@ func Routers() *gin.Engine {
 		v1public := v1.Group("/public")
 		V1Public(v1public)
 		v1manager := v1.Group("/manager")
+		v1manager.Use(middleware.JWTAuthMiddleware())
 		V1Manager(v1manager)
 		// 发送邮件
 		v1.POST("/send_mail", v1api.SendAuthCodeMailsController)
-		// 登录
-		v1.POST("/login", v1api.Login)
 	}
 
 	UserRoutes(router)

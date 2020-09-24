@@ -10,7 +10,7 @@ import "github.com/jinzhu/gorm"
 type User struct {
 	gorm.Model
 
-	UserName    string `json:"userName" gorm:"type:varchar(20);unique_index;not null; comment:'用户登录名'"`
+	Username    string `json:"username" gorm:"type:varchar(20);unique_index;not null; comment:'用户登录名'"`
 	Password    string `json:"-"  gorm:"comment:'用户登录密码'"`
 	Email       string `json:"email" gorm:"comment:'邮箱'"`
 	NickName    string `json:"nickName" gorm:"comment:'用户昵称'"`

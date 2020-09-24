@@ -57,7 +57,7 @@ func UserCreateService(c *gin.Context, params param.SignUpParam) gin.H {
 	}
 
 	newUser := model.User{
-		UserName: userName,
+		Username: userName,
 		NickName: userName,
 		Email:    email,
 		Password: string(hasedPassword),
