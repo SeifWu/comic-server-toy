@@ -17,6 +17,10 @@ redis:
 session:
   secretKey: secretKey
 
+jwt:
+  secretKey: secretKey
+  issuer: seif
+
 formMail:
   host: smtp.qq.com
   port: 587
