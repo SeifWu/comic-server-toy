@@ -1,4 +1,6 @@
-/* 请求规范
+package response
+
+/* Package response 请求规范
 {
 	"success": true,
 	"data": {},
@@ -11,7 +13,6 @@
 	}
 }
 */
-package response
 
 import (
 	"net/http"
