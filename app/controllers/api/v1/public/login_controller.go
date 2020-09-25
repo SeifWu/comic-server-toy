@@ -29,7 +29,7 @@ func Login(c *gin.Context) {
 
 	var user model.User
 
-	DB = DB.Scopes(scope.UserFindByUsername(loginParams.UserName)).First(&user)
+	DB = DB.Scopes(scope.UserFindByUsername(loginParams.Username)).First(&user)
 
 	if user.ID == 0 {
 		response.Response(c, http.StatusBadRequest, "40001", nil, "用户不存在", nil)
@@ -37,7 +37,7 @@ func Login(c *gin.Context) {
 	}
 
 	// 密码是否正确
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginParams.PassWord)); err != nil {
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginParams.Password)); err != nil {
 		response.Response(c, http.StatusBadRequest, "40001", nil, "密码错误", nil)
 		return
 	}

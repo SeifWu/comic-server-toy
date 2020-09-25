@@ -43,5 +43,5 @@ func CurrentUserController(c *gin.Context) {
 		return
 	}
 
-	response.Response(c, http.StatusOK, "0", gin.H{"user": userSerializer}, "请求成功", nil)
+	response.Response(c, http.StatusOK, "0", userSerializer, "请求成功", nil)
 }

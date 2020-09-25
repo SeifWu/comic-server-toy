@@ -7,8 +7,8 @@ type UserSerializer struct {
 	ID          uint      `json:"id"`
 	CreatedAt   time.Time `json:"createdAt"`
 	UpdatedAt   time.Time `json:"updatedAt"`
-	UserName    string    `json:"userName"`
-	NickName    string    `json:"nickName"`
+	Username    string    `json:"username"`
+	Nickname    string    `json:"nickname"`
 	Avatar      string    `json:"avatar"`
 	Mobile      string    `json:"mobile"`
 	Description string    `json:"description"`

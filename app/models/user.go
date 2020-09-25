@@ -13,7 +13,7 @@ type User struct {
 	Username    string `json:"username" gorm:"type:varchar(20);unique_index;not null; comment:'用户登录名'"`
 	Password    string `json:"-"  gorm:"comment:'用户登录密码'"`
 	Email       string `json:"email" gorm:"comment:'邮箱'"`
-	NickName    string `json:"nickName" gorm:"comment:'用户昵称'"`
+	Nickname    string `json:"nickname" gorm:"comment:'用户昵称'"`
 	Avatar      string `json:"avatar" gorm:"comment:'用户头像'"`
 	Mobile      string `json:"mobile" gorm:"comment:'联系电话'"`
 	Description string `json:"description" gorm:"type:text;comment:'个人描述'"`

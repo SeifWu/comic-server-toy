@@ -25,7 +25,7 @@ func Response(ctx *gin.Context, httpStatus int, errcode string, data interface{}
 	ctx.JSON(
 		httpStatus,
 		gin.H{
-			"success": errcode != "0",
+			"success": errcode == "0",
 			"errCode": errcode,
 			"data":    data,
 			"message": msg,

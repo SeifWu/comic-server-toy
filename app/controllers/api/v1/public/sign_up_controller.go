@@ -26,7 +26,7 @@ func SignUp(c *gin.Context) {
 
 	user := model.User{
 		Username: signUpParam.Username,
-		NickName: signUpParam.Username,
+		Nickname: signUpParam.Username,
 		Email:    signUpParam.Email,
 		Password: signUpParam.Password,
 	}
