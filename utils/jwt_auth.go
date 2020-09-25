@@ -22,7 +22,7 @@ type JWTAuthClaims struct {
 // GenerateJWT 生成 Token
 func GenerateJWT(username string) (string, error) {
 	jwtAuthClaims := JWTAuthClaims{
-		"username", // 自定义字段
+		username, // 自定义字段
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(JwtExpireDuration).Unix(), // 过期时间
 			Issuer:    viper.GetString("jwt.issuer"),            // 签发人

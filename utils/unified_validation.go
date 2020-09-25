@@ -6,12 +6,11 @@ import (
 	"seifwu/global"
 	"strings"
 
-	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 )
 
 // UnifiedValidation 统一参数验证
-func UnifiedValidation(c *gin.Context, err error, errCode string, params interface{}) interface{} {
+func UnifiedValidation(err error, params interface{}) interface{} {
 	errs, ok := err.(validator.ValidationErrors)
 
 	if !ok {

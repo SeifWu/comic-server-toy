@@ -1,4 +1,4 @@
-package v1public
+package v1manager
 
 import (
 	"net/http"

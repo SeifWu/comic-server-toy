@@ -8,6 +8,7 @@ import (
 
 // V1Manager v1 manager 接口
 func V1Manager(router *gin.RouterGroup) {
+	router.GET("/currentUser", v1manager.CurrentUserController)
 	router.GET("/comics", v1manager.FindComicListController)
 	router.GET("/craw_comic", v1manager.CrawlComicsController)
 }

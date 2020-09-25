@@ -18,7 +18,7 @@ func SignUp(c *gin.Context) {
 
 	// 参数错误处理
 	if err := c.ShouldBind(&signUpParam); err != nil {
-		errResult := util.UnifiedValidation(c, err, "40000", signUpParam)
+		errResult := util.UnifiedValidation(err, signUpParam)
 
 		response.Response(c, http.StatusBadRequest, "40000", nil, errResult, nil)
 		return
