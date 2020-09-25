@@ -29,7 +29,7 @@ func SendAuthCodeMailsController(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&sendMailParams)
 	if err != nil {
-		response.Fail(c, gin.H{"errMsg": "传递参数有误"})
+		response.Fail(c, "40004", "传递参数有误")
 		return
 	}
 
@@ -41,16 +41,16 @@ func SendAuthCodeMailsController(c *gin.Context) {
 	if sendMailParams.Event == "register" {
 		err = util.SendMail(mailTo, "[我猜你在找验证码]", mailContent(authCode))
 		if err != nil {
-			response.Fail(c, gin.H{"errMsg": err.Error(), "email": sendMailParams.Email})
+			response.Fail(c, "40004", err.Error())
 			return
 		}
 
 		err = rdb.Set(c, sendMailParams.Email+"-register", authCode, 120*time.Second).Err()
 		if err != nil {
-			response.Fail(c, gin.H{"errMsg": err, "email": sendMailParams.Email})
+			response.Fail(c, "40004", err)
 			return
 		}
 	}
 
-	response.Success(c, gin.H{"user": "x", "email": sendMailParams.Email}, "1")
+	response.Success(c, gin.H{"user": "x", "email": sendMailParams.Email}, "1", nil)
 }

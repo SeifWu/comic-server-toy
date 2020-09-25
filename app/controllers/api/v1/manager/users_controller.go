@@ -17,7 +17,7 @@ import (
 func FindListUser(c *gin.Context) {
 	result := service.UserFindListService(c, true)
 	if result["success"] == false {
-		response.Fail(c, result)
+		response.Fail(c, "40005", result)
 		return
 	}
 
