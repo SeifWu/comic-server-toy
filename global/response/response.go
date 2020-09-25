@@ -1,3 +1,16 @@
+/* 请求规范
+{
+	"success": true,
+	"data": {},
+	"errorCode": "0",
+	"message": "",
+	"meta": {
+		"current": 1,
+		"pageSize": 10,
+		"total": 100,
+	}
+}
+*/
 package response
 
 import (
@@ -11,6 +24,7 @@ func Response(ctx *gin.Context, httpStatus int, errcode string, data interface{}
 	ctx.JSON(
 		httpStatus,
 		gin.H{
+			"success": errcode != "0",
 			"errCode": errcode,
 			"data":    data,
 			"message": msg,
@@ -20,22 +34,11 @@ func Response(ctx *gin.Context, httpStatus int, errcode string, data interface{}
 }
 
 // Success 请求成功
-func Success(ctx *gin.Context, data gin.H, msg interface{}) {
-	Response(ctx, http.StatusOK, "200", data, msg, nil)
+func Success(ctx *gin.Context, data interface{}, msg interface{}, meta gin.H) {
+	Response(ctx, http.StatusOK, "0", data, msg, meta)
 }
 
-/*
-Fail 请求失败
-data 错误返回示例
-{
-	"success": false,
-	"errCode": "40001"
-	"errMsg": "错误提示"
-}
-*/
-func Fail(ctx *gin.Context, data gin.H) {
-	ctx.JSON(
-		http.StatusBadRequest,
-		data,
-	)
+// Fail 请求失败
+func Fail(ctx *gin.Context, errcode string, msg interface{}) {
+	Response(ctx, http.StatusBadRequest, errcode, nil, msg, nil)
 }
