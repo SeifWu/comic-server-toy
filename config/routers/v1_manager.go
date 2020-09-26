@@ -10,5 +10,5 @@ import (
 func V1Manager(router *gin.RouterGroup) {
 	router.GET("/currentUser", v1manager.CurrentUserController)
 	router.GET("/comics", v1manager.FindComicListController)
-	router.GET("/craw_comic", v1manager.CrawlComicsController)
+	router.GET("/comic_crawler", v1manager.CrawlComicsController)
 }
