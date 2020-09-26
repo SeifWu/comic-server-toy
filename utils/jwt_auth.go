@@ -8,7 +8,7 @@ import (
 )
 
 // JwtExpireDuration JWT 过期时间
-const JwtExpireDuration = time.Hour * 2
+const JwtExpireDuration = time.Hour * 2000
 
 // JwtSecretKey 生成 Token 时的密钥
 var JwtSecretKey = []byte(viper.GetString("jwt.secretKey"))
