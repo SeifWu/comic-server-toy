@@ -10,10 +10,8 @@ import (
 
 // CrawlComicsController 爬取接口
 func CrawlComicsController(c *gin.Context) {
-	var qiman qiman6.Qiman6
-	// a, _ := qiman.Search("鬼灭之刃")
-	// qiman.ComicPageQiman6("http://www.qiman6.com/16384/")
-	qiman.ComicChapterListQiman6("http://www.qiman6.com/16384/")
-	// fmt.Println("result: ", a)
-	response.Response(c, http.StatusOK, "0", "a", nil, nil)
+	var qiman qiman6.New
+	a, _ := qiman.Search("鬼灭之刃")
+
+	response.Response(c, http.StatusOK, "0", a.Data, nil, nil)
 }

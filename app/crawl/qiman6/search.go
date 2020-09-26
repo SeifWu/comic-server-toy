@@ -18,11 +18,11 @@ type SearchResult struct {
 	Cover         string `json:"cover"`
 	LatestChapter string `json:"latestChapter"`
 	Title         string `json:"title"`
-	Tip           string `json:"tip"`
+	Author        string `json:"author"`
 }
 
 // Search 搜索
-func (q *Qiman6) Search(query string) (SearchResults, error) {
+func (q *New) Search(query string) (SearchResults, error) {
 	var result SearchResults
 	var err error
 	var searchList []SearchResult
@@ -42,7 +42,7 @@ func (q *Qiman6) Search(query string) (SearchResults, error) {
 				Cover:         h.ChildAttr(".book > a > .cover", "src"),
 				LatestChapter: h.ChildText(".book > a > .msg.op"),
 				Title:         h.ChildText(".title"),
-				Tip:           h.ChildText(".tip"),
+				Author:        h.ChildText(".tip"),
 			}
 			searchList = append(searchList, item)
 		})

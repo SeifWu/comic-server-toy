@@ -10,7 +10,7 @@ import (
 	"github.com/chromedp/chromedp"
 )
 
-func (q *Qiman6) ComicChapterListQiman6(url string) {
+func (q *New) ComicChapterListQiman6(url string) {
 	// create chrome instance
 	ctx, cancel := chromedp.NewContext(
 		context.Background(),

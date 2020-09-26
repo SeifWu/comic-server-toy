@@ -7,7 +7,7 @@ import (
 	"github.com/gocolly/colly"
 )
 
-func (q *Qiman6) ComicPageQiman6(url string) {
+func (q *New) ComicPageQiman6(url string) {
 	c := colly.NewCollector(
 		colly.Async(true),
 		colly.UserAgent("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"),
