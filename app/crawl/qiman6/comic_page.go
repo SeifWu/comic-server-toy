@@ -30,6 +30,9 @@ func (q *New) ComicPage(id string) (Comic, error) {
 		introduction := e.ChildText(".comicInfo .ib.info p.content")
 		log.Println("获取简介: ", introduction)
 
+		author := e.ChildText(".comicInfo .ib.info p:not(.gray) span.ib.l")
+		log.Println("获取作者: ", author)
+
 		cover := e.ChildAttr(".comicInfo .ib.cover .img img", "src")
 		log.Println("获取封面: ", cover)
 
@@ -47,6 +50,7 @@ func (q *New) ComicPage(id string) (Comic, error) {
 		comic.Title = title
 		comic.Introduction = introduction
 		comic.Cover = cover
+		comic.Author = author
 		comic.LatestChapter = latestChapter
 		comic.ChapterList = chapterList
 	})

@@ -23,6 +23,7 @@ type Comic struct {
 	Title         string    `json:"title"`
 	Introduction  string    `json:"introduction"`
 	Cover         string    `json:"cover"`
+	Author        string    `json:"author"`
 	LatestChapter string    `json:"latestChapter"`
 	ChapterList   []Chapter `json:"chapterList"`
 }
