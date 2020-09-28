@@ -26,7 +26,7 @@ func UserFindListService(c *gin.Context, paging bool) gin.H {
 		DB = DB.Where("nick_name LIKE ?", fmt.Sprintf("%s%%", nickName))
 	}
 
-	total := 0
+	var total int64 = 0
 	DB.Count(&total)
 
 	current, _ := strconv.Atoi(c.Query("current"))

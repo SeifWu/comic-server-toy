@@ -1,6 +1,6 @@
 package model
 
-import "github.com/jinzhu/gorm"
+import "gorm.io/gorm"
 
 // ComicChapterDetail 漫画内容
 type ComicChapterDetail struct {

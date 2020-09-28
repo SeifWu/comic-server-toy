@@ -19,8 +19,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
-	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 // Initializers 集合初始化
@@ -64,9 +65,7 @@ func InitConfig() {
 
 // InitDB 初始化数据库
 func InitDB() {
-	driverName := viper.GetString("dataSource.driverName")
-
-	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true",
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true",
 		viper.GetString("dataSource.username"),
 		viper.GetString("dataSource.password"),
 		viper.GetString("dataSource.host"),
@@ -75,7 +74,8 @@ func InitDB() {
 		viper.GetString("dataSource.charset"),
 	)
 
-	db, err := gorm.Open(driverName, args)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+
 	if err != nil {
 		panic("数据库连接失败，错误:" + err.Error())
 	}

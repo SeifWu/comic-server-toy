@@ -3,7 +3,7 @@ package util
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 // LikeCondition Like 查询语句

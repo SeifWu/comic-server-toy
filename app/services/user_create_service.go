@@ -44,7 +44,7 @@ func UserCreateService(c *gin.Context, params param.SignUpParam) gin.H {
 		return gin.H{"success": false, "message": "用户名不能为空"}
 	}
 
-	var count int
+	var count int64
 	DB.Where("user_name = ? ", userName).First(&user).Count(&count)
 	if count > 0 {
 		return gin.H{"success": false, "message": "该用户名已存在"}
