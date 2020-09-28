@@ -7,7 +7,8 @@ import (
 	"github.com/gocolly/colly"
 )
 
-func (q *New) ComicPageQiman6(url string) {
+// ComicPage 漫画详情页
+func (q *New) ComicPage(url string) {
 	c := colly.NewCollector(
 		colly.Async(true),
 		colly.UserAgent("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"),
@@ -36,5 +37,5 @@ func (q *New) ComicPageQiman6(url string) {
 		fmt.Println("简介: ", introduce)
 	})
 
-	c.Visit(url)
+	c.Visit("http://" + url)
 }

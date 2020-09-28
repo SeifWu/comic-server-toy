@@ -11,4 +11,5 @@ func V1Manager(router *gin.RouterGroup) {
 	router.GET("/currentUser", v1manager.CurrentUserController)
 	router.GET("/comics", v1manager.FindComicListController)
 	router.GET("/comic_crawler", v1manager.CrawlComicsController)
+	router.POST("/comic_crawler/save", v1manager.SaveCrawComicController)
 }
