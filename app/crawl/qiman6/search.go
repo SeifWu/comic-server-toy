@@ -3,6 +3,7 @@ package qiman6
 import (
 	"fmt"
 	"reflect"
+	"strings"
 
 	"github.com/gocolly/colly"
 )
@@ -14,6 +15,7 @@ type SearchResults struct {
 
 // SearchResult 单条搜索结果
 type SearchResult struct {
+	ID            string `json:"id"`
 	URL           string `json:"url"`
 	Cover         string `json:"cover"`
 	LatestChapter string `json:"latestChapter"`
@@ -26,24 +28,24 @@ func (q *New) Search(query string) (SearchResults, error) {
 	var result SearchResults
 	var err error
 	var searchList []SearchResult
-	domain := "www.qiman6.com"
-
 	// Instantiate default collector
 	myColly := colly.NewCollector(
 		colly.UserAgent("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"),
-		colly.AllowedDomains(domain),
+		colly.AllowedDomains(Domain),
 	)
 
 	myColly.OnHTML(".mainForm > .updateList > .bookList_3", func(e *colly.HTMLElement) {
 
 		e.ForEach(".item.ib", func(i int, h *colly.HTMLElement) {
 			item := SearchResult{
-				URL:           domain + h.ChildAttr("a", "href"),
+				ID:            strings.Split(h.ChildAttr("a", "href"), "/")[1],
+				URL:           Domain + h.ChildAttr("a", "href"),
 				Cover:         h.ChildAttr(".book > a > .cover", "src"),
 				LatestChapter: h.ChildText(".book > a > .msg.op"),
 				Title:         h.ChildText(".title"),
 				Author:        h.ChildText(".tip"),
 			}
+
 			searchList = append(searchList, item)
 		})
 
