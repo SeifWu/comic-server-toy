@@ -15,6 +15,7 @@ require (
 	github.com/go-redis/redis/v8 v8.0.0-beta.8
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/gocolly/colly v1.2.0
+	github.com/google/uuid v1.1.2
 	github.com/jawher/mow.cli v1.2.0 // indirect
 	github.com/jinzhu/gorm v1.9.16
 	github.com/json-iterator/go v1.1.10 // indirect
