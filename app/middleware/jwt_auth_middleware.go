@@ -27,20 +27,24 @@ func JWTAuthMiddleware() func(c *gin.Context) {
 
 		if err != nil {
 			validationError, hasError := err.(*jwt.ValidationError)
+			errorMessage := "Token 错误"
 			if hasError {
-				val, err := global.RDB0.Get(ctx, mc.UUID).Result()
-				// 尝试刷新 Token
-				// Token 是过期的，Redis 有缓存且两值相等
-				if validationError.Errors&jwt.ValidationErrorExpired != 0 && err == nil && authHeader == val {
-					tokenString, _ := util.GenerateJWT(mc.Username)
-					c.Writer.Header().Add("X-Token", tokenString)
-					c.Abort()
-					return
+				if validationError.Errors&jwt.ValidationErrorExpired != 0 {
+					errorMessage = "Token 过期"
+					val, err := global.RDB0.Get(ctx, mc.UUID).Result()
+					// 尝试刷新 Token
+					// Token 是过期的，Redis 有缓存且两值相等
+					if validationError.Errors&jwt.ValidationErrorExpired != 0 && err == nil && authHeader == val {
+						tokenString, _ := util.GenerateJWT(mc.Username)
+						c.Writer.Header().Add("X-Token", tokenString)
+						c.Abort()
+						return
+					}
 				}
-
-				tokenError(c, validationError)
+				// TODO 添加其他错误
 			}
 
+			response.Response(c, http.StatusUnauthorized, "401", nil, errorMessage, nil)
 			c.Abort()
 			return
 		}
@@ -49,13 +53,4 @@ func JWTAuthMiddleware() func(c *gin.Context) {
 		c.Set("username", mc.Username)
 		c.Next() // 后续的处理函数可以用过c.Get("username")来获取当前请求的用户信息
 	}
-}
-
-func tokenError(c *gin.Context, validationError *jwt.ValidationError) {
-	errorMessage := "Token 错误"
-	if validationError.Errors&jwt.ValidationErrorExpired != 0 {
-		errorMessage = "Token 过期"
-	}
-
-	response.Response(c, http.StatusUnauthorized, "401", nil, errorMessage, nil)
 }
