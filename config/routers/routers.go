@@ -39,7 +39,5 @@ func Routers() *gin.Engine {
 		v1.POST("/send_mail", v1api.SendAuthCodeMailsController)
 	}
 
-	UserRoutes(router)
-
 	return router
 }
