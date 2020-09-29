@@ -11,5 +11,5 @@ type Comic struct {
 	Cover     string `json:"cover" gorm:"comment:'封面'"`
 	Author    string `json:"author" gorm:"comment:'作者'"`
 
-	ComicChapter []ComicChapter
+	ComicChapter []ComicChapter `json:"comicChapter"`
 }

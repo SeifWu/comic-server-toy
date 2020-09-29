@@ -2,14 +2,20 @@ package v1manager
 
 import (
 	"net/http"
+	model "seifwu/app/models"
+	"seifwu/global"
 	"seifwu/global/response"
+	scope "seifwu/global/scopes"
 
 	"github.com/gin-gonic/gin"
 )
 
 // FindComicListController 漫画列表
 func FindComicListController(c *gin.Context) {
-	response.Response(c, http.StatusOK, "0", gin.H{"test": "请求成功"}, nil, nil)
+	var comics []model.Comic
+	// Table("comics")
+	global.DB.Model(&model.Comic{}).Preload("ComicChapter").Scopes(scope.Paginate(c)).Find(&comics)
+	response.Response(c, http.StatusOK, "0", comics, nil, nil)
 }
 
 // FindComicController 漫画详情
