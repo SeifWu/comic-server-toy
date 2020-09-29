@@ -93,6 +93,7 @@ func saveQiman6Content(comic qiman6.Comic) {
 				global.DB.Model(&result).Association("ComicChapterDetail").Clear()
 				global.DB.Model(&result).Association("ComicChapterDetail").Append(details)
 				global.DB.Unscoped().Delete(model.ComicChapterDetail{}, "comic_chapter_id IS NULL")
+				global.DB.Exec("UPDATE `comic_chapter_details` SET url = REPLACE(url, '//', '') WHERE url LIKE '//%'")
 			}
 		}
 
