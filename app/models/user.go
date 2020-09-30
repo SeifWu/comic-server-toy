@@ -1,6 +1,9 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"database/sql"
+	"time"
+)
 
 // User 用户表
 /**
@@ -8,14 +11,16 @@ import "gorm.io/gorm"
  * UserName UUID 随机
 **/
 type User struct {
-	gorm.Model
-
-	Username    string `json:"username" gorm:"type:varchar(20);unique_index;not null; comment:'用户登录名'"`
-	Password    string `json:"-"  gorm:"comment:'用户登录密码'"`
-	Email       string `json:"email" gorm:"comment:'邮箱'"`
-	Nickname    string `json:"nickname" gorm:"comment:'用户昵称'"`
-	Avatar      string `json:"avatar" gorm:"comment:'用户头像'"`
-	Mobile      string `json:"mobile" gorm:"comment:'联系电话'"`
-	Description string `json:"description" gorm:"type:text;comment:'个人描述'"`
-	Status      int    `json:"status" gorm:"comment:'0 => 待激活, 1 => 正常'"`
+	ID          uint         `json:"id" gorm:"primaryKey"`
+	CreatedAt   time.Time    `json:"createdAT"`
+	UpdatedAt   time.Time    `json:"updatedAt"`
+	DeletedAt   sql.NullTime `gorm:"index"`
+	Username    string       `json:"username" gorm:"type:varchar(20);unique_index;not null; comment:'用户登录名'"`
+	Password    string       `json:"-"  gorm:"comment:'用户登录密码'"`
+	Email       string       `json:"email" gorm:"comment:'邮箱'"`
+	Nickname    string       `json:"nickname" gorm:"comment:'用户昵称'"`
+	Avatar      string       `json:"avatar" gorm:"comment:'用户头像'"`
+	Mobile      string       `json:"mobile" gorm:"comment:'联系电话'"`
+	Description string       `json:"description" gorm:"type:text;comment:'个人描述'"`
+	Status      int          `json:"status" gorm:"comment:'0 => 待激活, 1 => 正常'"`
 }
