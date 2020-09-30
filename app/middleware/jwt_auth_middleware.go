@@ -37,8 +37,8 @@ func JWTAuthMiddleware() func(c *gin.Context) {
 					if validationError.Errors&jwt.ValidationErrorExpired != 0 && err == nil && authHeader == val {
 						tokenString, _ := util.GenerateJWT(mc.Username)
 						c.Writer.Header().Add("X-Token", tokenString)
-						c.Abort()
-						return
+						c.Set("username", mc.Username)
+						c.Next()
 					}
 				}
 				// TODO 添加其他错误
