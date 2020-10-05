@@ -14,12 +14,22 @@ import (
 func FindComicListController(c *gin.Context) {
 	var comics []model.Comic
 	// Table("comics")
-	global.DB.Model(&model.Comic{}).Preload("ComicChapter").Scopes(scope.Paginate(c)).Find(&comics)
+	global.DB.Debug().Model(&model.Comic{}).Preload("ComicChapter").Scopes(scope.Paginate(c)).Find(&comics)
 	response.Response(c, http.StatusOK, "0", comics, nil, nil)
 }
 
 // FindComicController 漫画详情
 func FindComicController(c *gin.Context) {
+	id := c.Param("id")
+	var comics model.Comic
+
+	global.DB.Debug().Preload("ComicChapter").Find(&comics, id)
+
+	response.Response(c, http.StatusOK, "0", comics, nil, nil)
+}
+
+// FindComicContentController 漫画详情
+func FindComicContentController(c *gin.Context) {
 	id := c.Param("id")
 	iid := c.Param("iid")
 
@@ -36,11 +46,7 @@ func FindComicController(c *gin.Context) {
 
 	global.DB.Debug().Model(&comicChapter).Association("ComicChapterDetail").Find(&comicChapter.ComicChapterDetail)
 
-	response.Response(c, http.StatusOK, "0", gin.H{
-		"id":           id,
-		"iid":          iid,
-		"comicChapter": comicChapter,
-	}, nil, gin.H{
+	response.Response(c, http.StatusOK, "0", comicChapter, nil, gin.H{
 		// 倒序 换一换
 		"previousChapter": nextChapter,
 		"nextChapter":     previousChapter,
