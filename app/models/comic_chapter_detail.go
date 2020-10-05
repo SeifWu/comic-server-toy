@@ -11,7 +11,7 @@ type ComicChapterDetail struct {
 	CreatedAt      time.Time    `json:"createdAT"`
 	UpdatedAt      time.Time    `json:"updatedAt"`
 	DeletedAt      sql.NullTime `gorm:"index"`
-	Postion        int          `gorm:"autoIncrement"`
 	URL            string       `json:"img"`
+	Postion        int
 	ComicChapterID uint
 }
